@@ -2,9 +2,11 @@
 
 
 ## Loading and preprocessing the data
-```{r}
+
+```r
 data <- read.csv("activity.csv")
 ```
+
 
 
 
