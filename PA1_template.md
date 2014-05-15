@@ -21,6 +21,23 @@ As we can see, the data contain 3 varibles which are numeric variables "steps", 
 
 ## What is mean total number of steps taken per day?
 
+```r
+library("ggplot2")
+qplot(steps, data = data, binwidth = 30)
+```
+
+![plot of chunk unnamed-chunk-2](figure/unnamed-chunk-2.png) 
+
+```r
+meanSteps <- mean(data$steps, na.rm = TRUE)
+medianSteps <- medianSteps(data$steps, na.rm = TRUE)
+```
+
+```
+## Error: 没有"medianSteps"这个函数
+```
+
+
 
 
 ## What is the average daily activity pattern?
