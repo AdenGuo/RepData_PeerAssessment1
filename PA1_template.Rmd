@@ -8,17 +8,32 @@ data$date <- as.factor(data$date)
 data$interval <- as.factor(data$interval)
 str(data)
 ```
-As we can see, the data contain 3 varibles which are numeric variables "steps", date variable "date" and numerical variable "interval".  
+As we can see, the data contain 3 varibles which are numeric variables "steps", date variable "date" (converted to factors) and numerical variable "interval" (converted to factors).  
 
 
 ## What is mean total number of steps taken per day?
 ```{r}
 library("ggplot2")
-qplot(steps, data =  data,binwidth = 30)
-meanSteps <- mean(data$steps, na.rm = TRUE)
-medianSteps <- median(data$steps, na.rm = TRUE)
+stepsDaySum <- data.frame (stepSums = rep(0,length(levels(data$date))), day = "2000-1-1", stringsAsFactors = FALSE)
+for (i in 1:length(levels(data$date))){
+  stepsDaySum$stepSums[i] <- sum(subset(data$steps, data$date == levels(data$date)[i]), na.rm = TRUE)
+  stepsDaySum$day[i] <- levels(data$date)[i]
+}
+qplot(stepSums, data = stepsDaySum)
+meanStepsSumDay <- mean(stepsDaySum$stepSums, na.rm = TRUE)
+medianStepsSumDay <- median(stepsDaySum$stepSums, na.rm = TRUE)
 ```
-The mean of the steps in 
+The mean of the steps in every day is about 
+```{r}
+meanStepsSumDay
+```
+The median of the steps in every day is about 
+```{r}
+medianStepsSumDay
+
+```
+
+
 
 
 ## What is the average daily activity pattern?
