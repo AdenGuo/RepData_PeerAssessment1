@@ -30,14 +30,10 @@ qplot(steps, data = data, binwidth = 30)
 
 ```r
 meanSteps <- mean(data$steps, na.rm = TRUE)
-medianSteps <- medianSteps(data$steps, na.rm = TRUE)
+medianSteps <- median(data$steps, na.rm = TRUE)
 ```
 
-```
-## Error: 没有"medianSteps"这个函数
-```
-
-
+The mean of the steps in 
 
 
 ## What is the average daily activity pattern?

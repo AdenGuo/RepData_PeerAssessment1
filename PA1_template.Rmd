@@ -4,7 +4,8 @@
 ## Loading data and transform the date in the data to Date type
 ```{r}
 data <- read.csv("activity.csv")
-data$date <- as.Date(data$date)
+data$date <- as.factor(data$date)
+data$interval <- as.factor(data$interval)
 str(data)
 ```
 As we can see, the data contain 3 varibles which are numeric variables "steps", date variable "date" and numerical variable "interval".  
