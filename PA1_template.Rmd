@@ -34,13 +34,42 @@ medianStepsSumDay
 ```
 
 
-
-
 ## What is the average daily activity pattern?
+```{r fig.width=12}
+stepsIntervalAverage <- data.frame (stepAverage = rep(0,length(levels(data$interval))), interval = "0", stringsAsFactors = FALSE)
+for (i in 1:length(levels(data$interval))){
+  stepsIntervalAverage$stepAverage[i] <- mean(subset(data$steps, data$interval == levels(data$interval)[i]), na.rm = TRUE)
+  stepsIntervalAverage$interval[i] <- levels(data$interval)[i]
+}
+qplot(interval, stepAverage, data = stepsIntervalAverage)
 
+maximInterval <- stepsIntervalAverage$interval[which.max(stepsIntervalAverage$stepAverage)]
+```
+
+The interval containing the maxim average of steps in a day is (0-5 minutes is interval 0) : 
+```{r}
+maximInterval
+
+```
 
 
 ## Imputing missing values
+```{r}
+naNumbers <- nrow(subset(data, is.na(data$steps) == TRUE))
+```
+
+
+The total number of missing values in the dataset is:
+```{r}
+naNumbers
+
+```
+Here is my strategy for missing values: I assume the steps across days are distributed normally. The calculation steps are:
+
+First, i obtain the mean and variance of the steps across 61 same intervals in different days .
+
+Second, i generate the missing value using normal distribution whose parameters are calculated by last step in the same interval. 
+
 
 
 

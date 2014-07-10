@@ -67,13 +67,59 @@ medianStepsSumDay
 
 
 
-
-
 ## What is the average daily activity pattern?
+
+```r
+stepsIntervalAverage <- data.frame(stepAverage = rep(0, length(levels(data$interval))), 
+    interval = "0", stringsAsFactors = FALSE)
+for (i in 1:length(levels(data$interval))) {
+    stepsIntervalAverage$stepAverage[i] <- mean(subset(data$steps, data$interval == 
+        levels(data$interval)[i]), na.rm = TRUE)
+    stepsIntervalAverage$interval[i] <- levels(data$interval)[i]
+}
+qplot(interval, stepAverage, data = stepsIntervalAverage)
+```
+
+![plot of chunk unnamed-chunk-5](figure/unnamed-chunk-5.png) 
+
+```r
+
+maximInterval <- stepsIntervalAverage$interval[which.max(stepsIntervalAverage$stepAverage)]
+```
+
+
+The interval containing the maxim average of steps in a day is (0-5 minutes is interval 0) : 
+
+```r
+maximInterval
+```
+
+```
+## [1] "835"
+```
 
 
 
 ## Imputing missing values
+
+```r
+naNumbers <- nrow(subset(data, is.na(data$steps) == TRUE))
+```
+
+
+
+The total number of missing values in the dataset is:
+
+```r
+naNumbers
+```
+
+```
+## [1] 2304
+```
+
+
+
 
 
 
